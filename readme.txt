@@ -3,3 +3,5 @@
 实例化自己的类并运行:暂时直接改Tutorial05.cpp的第258行
 
 自己用的图片或者XAML,放在resource文件夹内
+
+test
