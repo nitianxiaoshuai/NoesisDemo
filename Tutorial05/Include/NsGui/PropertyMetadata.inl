@@ -1,0 +1,118 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Noesis Engine - http://www.noesisengine.com
+// Copyright (c) 2009-2010 Noesis Technologies S.L. All Rights Reserved.
+// [CR #1197]
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#include <NsGui/BoxingUtils.h>
+
+
+namespace Noesis
+{
+namespace Gui
+{
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline Ptr<PropertyMetadata> PropertyMetadata::Create()
+{
+    return *new PropertyMetadata();
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+template<class T>
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const T& defaultValue)
+{
+    return *new PropertyMetadata(BoxingUtils::GetBoxedValue<T>(&defaultValue));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const PropertyChangedDelegate& propChanged)
+{
+    return *new PropertyMetadata(propChanged);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const CoerceDelegate& coerce)
+{
+    return *new PropertyMetadata(coerce);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+template<class T>
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const T& defaultValue,
+    const PropertyChangedDelegate& propChanged)
+{
+    return *new PropertyMetadata(BoxingUtils::GetBoxedValue<T>(&defaultValue),
+        propChanged);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+template<class T>
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const T& defaultValue,
+    const CoerceDelegate& coerce)
+{
+    return *new PropertyMetadata(BoxingUtils::GetBoxedValue<T>(&defaultValue),
+        coerce);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+template<class T>
+inline Ptr<PropertyMetadata> PropertyMetadata::Create(const T& defaultValue,
+    const PropertyChangedDelegate& propChanged, const CoerceDelegate& coerce)
+{
+    return *new PropertyMetadata(BoxingUtils::GetBoxedValue<T>(&defaultValue),
+        propChanged, coerce);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+NsBool PropertyMetadata::HasDefaultValue() const
+{
+    return (mLocalFlags & PropertyFlags_Default) != 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+const Ptr<Core::BaseComponent>& PropertyMetadata::GetDefaultValue() const
+{
+    return mDefaultValue;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+NsBool PropertyMetadata::HasCoerceDelegate() const
+{
+    return (mLocalFlags & PropertyFlags_Coerce) != 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline const PropertyMetadata::CoerceDelegate& PropertyMetadata::GetCoerceDelegate() const
+{
+    return mCoerceDelegate;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+NsBool PropertyMetadata::HasPropertyChangedDelegate() const
+{
+    return (mLocalFlags & PropertyFlags_Changed) != 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline const PropertyMetadata::PropertyChangedDelegate& 
+PropertyMetadata::GetPropertyChangedDelegate() const
+{
+    return mPropertyChangedDelegate;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+NsBool PropertyMetadata::IsUncached() const
+{
+    return (mLocalFlags & PropertyFlags_Uncached) != 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+inline NsBool PropertyMetadata::Uncached() const
+{
+    return mUncached;
+}
+
+}
+}

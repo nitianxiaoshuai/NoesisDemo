@@ -1,0 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Noesis Engine - http://www.noesisengine.com
+// Copyright (c) 2009-2010 Noesis Technologies S.L. All Rights Reserved.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef __CORE_DELEGATEFORWARD_H__
+#define __CORE_DELEGATEFORWARD_H__
+
+
+namespace Noesis
+{
+
+namespace Core
+{
+template<class T> class Delegate;
+}
+
+}
+
+#endif

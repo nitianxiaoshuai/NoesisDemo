@@ -1,0 +1,38 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Noesis Engine - http://www.noesisengine.com
+// Copyright (c) 2009-2010 Noesis Technologies S.L. All Rights Reserved.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef __CORE_TYPEMETADATA_H__
+#define __CORE_TYPEMETADATA_H__
+
+
+#include <Noesis.h>
+#include <NsCore/KernelApi.h>
+#include <NsCore/BaseComponent.h>
+#include <NsCore/ReflectionDeclare.h>
+
+
+namespace Noesis
+{
+namespace Core
+{
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// TypeMetaData. Base class for type metadata.
+////////////////////////////////////////////////////////////////////////////////////////////////////
+class NS_CORE_KERNEL_API TypeMetaData: public BaseComponent
+{
+public:
+    /// Constructor
+    TypeMetaData();
+
+    NS_DECLARE_REFLECTION(TypeMetaData, BaseComponent)
+};
+
+}
+}
+
+
+#endif
