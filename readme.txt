@@ -5,3 +5,5 @@
 自己用的图片或者XAML,放在resource文件夹内
 
 test
+
+fangxin
