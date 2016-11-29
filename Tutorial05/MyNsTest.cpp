@@ -3,7 +3,8 @@
 #include "MyNsTest.h"
 
 MyNsTest::MyNsTest(){
-	Noesis::GUI::LoadComponent(this, "MyNsTest.xaml");
+	printf("mynstest ctor");
+	Noesis::GUI::LoadComponent(this, "MainWindow.xaml");
 }
 
 MyNsTest::~MyNsTest(){
