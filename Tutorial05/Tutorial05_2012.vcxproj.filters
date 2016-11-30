@@ -33,6 +33,7 @@
     <ClInclude Include="Renderers\D3D11\D3D11RenderDevice.h">
       <Filter>RenderDevice</Filter>
     </ClInclude>
+    <ClInclude Include="Demo.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Tutorial05.fx">
@@ -44,5 +45,8 @@
     <FxCompile Include="Tutorial05_VS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="resource\MainWindow.xaml" />
   </ItemGroup>
 </Project>
