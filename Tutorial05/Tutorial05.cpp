@@ -257,7 +257,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 		Ptr<ResourceDictionary> theme = Noesis::GUI::LoadXaml<ResourceDictionary>("NoesisStyle.xaml");
 		Ptr<MyNsTest> nsTest = *new MyNsTest();
 		g_XamlView = Noesis::GUI::CreateView(nsTest.GetPtr(), theme.GetPtr());
-        g_XamlView->SetSize(g_Width, g_Height);
+        //g_XamlView->SetSize(g_Width, g_Height);
+		g_XamlView->SetSize(1000, g_Height);
         g_XamlView->SetAntialiasingMode(Noesis::Gui::AntialiasingMode_PPAA);
 
         // Initializes renderer. This could be done in a render thread
