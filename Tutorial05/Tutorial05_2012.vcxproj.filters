@@ -33,6 +33,8 @@
     <ClInclude Include="Renderers\D3D11\D3D11RenderDevice.h">
       <Filter>RenderDevice</Filter>
     </ClInclude>
+    <ClInclude Include="MySeecond.h" />
+    <ClInclude Include="MyGod.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Tutorial05.fx">

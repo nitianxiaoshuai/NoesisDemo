@@ -1,7 +1,7 @@
 <Grid
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  x:Class="MyNsTest">
+ >
   
   <Viewbox Margin="150">
   

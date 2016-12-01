@@ -348,12 +348,12 @@
     <ClCompile Include="Tutorial05.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MyGod.h" />
+    <ClInclude Include="MySeecond.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderers\D3D11\D3D11RenderDevice.h" />
     <CLInclude Include="resource.h" />
     <ResourceCompile Include="Tutorial05.rc" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
