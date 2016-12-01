@@ -1,6 +1,5 @@
 #include <NoesisGUI.h>
 #include <stdio.h>
-#include <string>
 #include <vector>
 
 class MyNsTest : public Noesis::Grid
@@ -8,7 +7,7 @@ class MyNsTest : public Noesis::Grid
 public:
 	MyNsTest();
 	~MyNsTest();
-	Noesis::StackPanel* diffusePanel_;
+	//Noesis::StackPanel* diffusePanel_;
 	//void MyNsTest::initCollectionView();
 	//void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e);
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
@@ -24,13 +23,11 @@ public:
 
 private:
 	NsString _name;
-	//NsString _imagename;
 
 	NS_IMPLEMENT_INLINE_REFLECTION(Player, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("Player");
 		NsProp("Name", &Player::_name);
-		//NsProp("ImageName", &Player::_imagename);
 	}
 
 };
