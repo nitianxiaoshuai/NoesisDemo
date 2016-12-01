@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "NsManager.h"
-#include "MyNsTest.h"
+#include "MySeecond.h"
 
 NsManager* NsManager::singleton = 0;
 NsManager::NsManager(){
@@ -20,5 +20,5 @@ NsManager* NsManager::getSingleton(){
 
 void NsManager::NsRegisterReflection(bool registerComponents)
 {
-	NS_REGISTER_COMPONENT(MyNsTest)
+	NS_REGISTER_COMPONENT(MySeecond)
 }

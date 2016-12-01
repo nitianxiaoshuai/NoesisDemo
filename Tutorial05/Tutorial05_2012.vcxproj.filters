@@ -21,6 +21,7 @@
     </ClCompile>
     <ClCompile Include="MyNsTest.cpp" />
     <ClCompile Include="NsManager.cpp" />
+    <ClCompile Include="MySeecond.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -33,6 +34,7 @@
     <ClInclude Include="Renderers\D3D11\D3D11RenderDevice.h">
       <Filter>RenderDevice</Filter>
     </ClInclude>
+    <ClInclude Include="MySeecond.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Tutorial05.fx">
