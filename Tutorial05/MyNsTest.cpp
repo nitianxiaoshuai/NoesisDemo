@@ -2,7 +2,10 @@
 #include "pch.h"
 #include "MyNsTest.h"
 #include <string>
+#include "Include\NsGui\Style.h"
+#include "Include\NsGui\UIElementCollection.h"
 MyNsTest::MyNsTest(){
+	this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
 	Noesis::GUI::LoadComponent(this, "addChuguiView.xaml");
 	std::string str = "БъЬт";
 	for (int i = 0; i < 20; i++) {
@@ -11,7 +14,12 @@ MyNsTest::MyNsTest(){
 }
 
 void MyNsTest::reloadView(){
-	Grid g;
+	gridTop_ = FindName<Grid>("GridTop");
+	//gridTop_
+}
+
+void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e) {
+
 }
 
 MyNsTest::~MyNsTest(){
