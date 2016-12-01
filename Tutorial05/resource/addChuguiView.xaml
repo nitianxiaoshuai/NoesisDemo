@@ -68,30 +68,20 @@
         <ScrollViewer Name="scrollTop" Margin="0, 0" Width="640"  Height="60" PanningMode="Both"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
             <Grid x:Name="GridTop" Background="Gray" ShowGridLines="False" Height="60" Width="800">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="45"/>
+                      <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Grid.Row="0" Content="标题1" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="1" Grid.Row="0" Content="标题2" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="2" Grid.Row="0" Content="标题3" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="3" Grid.Row="0" Content="标题4" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="4" Grid.Row="0" Content="标题5" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="5" Grid.Row="0" Content="标题6" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="6" Grid.Row="0" Content="标题7" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="7" Grid.Row="0" Content="标题8" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="8" Grid.Row="0" Content="标题9" Style="{StaticResource ButtonStyle}"></Button>
-                <Button  Grid.Column="9" Grid.Row="0" Content="标题10" Style="{StaticResource ButtonStyle}"></Button>
             </Grid>
         </ScrollViewer>
     </StackPanel>
