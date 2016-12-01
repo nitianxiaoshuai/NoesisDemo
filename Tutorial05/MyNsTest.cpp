@@ -8,16 +8,16 @@
 using namespace Noesis;
 
 MyNsTest::MyNsTest(){
-	this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
-	Noesis::GUI::LoadComponent(this, "fangxin.xaml");
-	diffusePanel_ = FindName<StackPanel>("diffusePicPanel");
-	initCollectionView();
-	//Noesis::GUI::LoadComponent(this, "cslizi.xaml");
+	//this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
+	//Noesis::GUI::LoadComponent(this, "fangxin.xaml");
+	//diffusePanel_ = FindName<StackPanel>("diffusePicPanel");
+	//initCollectionView();
+	Noesis::GUI::LoadComponent(this, "cslizi.xaml");
 }
 
 MyNsTest::~MyNsTest(){
 }
-void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e) {
+/*void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e) {
 
 }
 
@@ -34,4 +34,4 @@ void MyNsTest::initCollectionView() {
 		cell->SetStyle(cellStyle);
 		collection->Add(cell.GetPtr());
 	}
-}
+}*/
