@@ -19,18 +19,26 @@ MyNsTest::MyNsTest(){
 //https://msdn.microsoft.com/zh-cn/library/vs/alm/ms752271(v=vs.110).aspx
 void MyNsTest::reloadView(){
 	gridTop_ = FindName<Grid>("GridTop");
+	gridTop_->GetRowDefinitions()->Clear();
+	gridTop_->GetColumnDefinitions()->Clear();
 	
-	Noesis::Gui::Style *style = GetResources()->FindName<Noesis::Gui::Style>("ButtonStyle");
-	
-	for (size_t i = 0; i < gridTopData_.size(); i++) {
-		Ptr<Noesis::Gui::Button> btn = *new Noesis::Gui::Button();
-		btn->SetContent(gridTopData_[i].c_str());
+	Style *style = GetResources()->FindName<Style>("ButtonStyle");
+
+	gridTop_->GetRowDefinitions()->Add(new RowDefinition());
+
+	for (int i = 0; i < gridTopData_.size(); i++) {
+		gridTop_->GetColumnDefinitions()->Add(new ColumnDefinition());
+
+		Ptr<Button> btn = *new Button();
 		btn->SetStyle(style);
+		btn->SetContent(gridTopData_[i].c_str());
+
 		gridTop_->SetRow(btn.GetPtr(), 0);
 		gridTop_->SetColumn(btn.GetPtr(), i);
-		//Noesis::Gui::Grid::SetRow(btn.GetPtr(), 0);
+		//Noesis::Gui::Grid::SetRow(btn.GetPtr(), 1);
 		//Noesis::Gui::Grid::SetColumn(btn.GetPtr(), i);
 		
+		gridTop_->GetChildren()->Add(btn.GetPtr());
 	}
 }
 
@@ -40,16 +48,3 @@ void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventA
 
 MyNsTest::~MyNsTest(){
 }
-
-/*
-<Button  Grid.Column="0" Grid.Row="0" Content="标题1" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="1" Grid.Row="0" Content="标题2" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="2" Grid.Row="0" Content="标题3" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="3" Grid.Row="0" Content="标题4" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="4" Grid.Row="0" Content="标题5" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="5" Grid.Row="0" Content="标题6" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="6" Grid.Row="0" Content="标题7" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="7" Grid.Row="0" Content="标题8" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="8" Grid.Row="0" Content="标题9" Style="{StaticResource ButtonStyle}"></Button>
-<Button  Grid.Column="9" Grid.Row="0" Content="标题10" Style="{StaticResource ButtonStyle}"></Button>
-*/

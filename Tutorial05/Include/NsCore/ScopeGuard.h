@@ -351,7 +351,7 @@ inline ObjScopeGuardImpl2<Obj1,Ret(Obj2::*)(P1a,P2a) const,P1b,P2b> MakeGuard(Ob
 }
 
 // This is the original code from the author that gives a warning on Visual Studio 2005 due to
-// “initialized but not referenced” warning. I prefer to use a variadic macro than globally
+// “initialized but not referenced?warning. I prefer to use a variadic macro than globally
 // disabling that warning.
 //
 //#define CONCATENATE_DIRECT(s1, s2) s1##s2
