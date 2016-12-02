@@ -19,15 +19,17 @@ class Player : public Noesis::BaseComponent
 {
 public:
 	Player() {}
-	Player(NsString name) : _name(name) {}
+	Player(NsString name,NsString imageName) : _name(name), _imageName(imageName){}
 
 private:
 	NsString _name;
+	NsString _imageName;
 
 	NS_IMPLEMENT_INLINE_REFLECTION(Player, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("Player");
 		NsProp("Name", &Player::_name);
+		NsProp("ImageName", &Player::_imageName);
 	}
 
 };
@@ -39,8 +41,16 @@ public:
 	{
 		_players = *new Noesis::ObservableCollection<Player>;
 		std::vector<NsString> nameVector{"Player1","Player2","Player3","Player4","Player5","Player6","Player7","Player8","Player9","Player10","Player11","Player12","Player13","Player14", "Player15"};
+		std::vector<NsString> imageName{"shenjian.png","dianchui.png"};
 		for (NsInt i = 0; i < nameVector.size(); i++) {
-			Noesis::Ptr<Player> player = *new Player(nameVector[i]);
+			NsString imgName = "";
+			if (i % 2 == 0) {
+				imgName = imageName[0];
+			} 
+			else {
+				imgName = imageName[1];
+			}
+			Noesis::Ptr<Player> player = *new Player(nameVector[i], imgName);
 			_players->Add(player.GetPtr());
 		}
 	}

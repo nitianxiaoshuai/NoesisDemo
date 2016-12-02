@@ -12,7 +12,7 @@
 				 <RowDefinition Height="20"/>
 			</Grid.RowDefinitions>	 
             <Button Width="100" Height="80" Grid.Row="0">
-			   <Image Source="shenjian.png" Stretch="Fill"/>
+			   <Image Source="{Binding ImageName}" Stretch="Fill"/>
             </Button>
 			<Button Content="{Binding Name}" Width="100" Height="20" Foreground="White" Grid.Row="1">
             </Button>
