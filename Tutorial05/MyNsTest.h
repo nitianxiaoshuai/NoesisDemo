@@ -24,12 +24,15 @@ public:
 private:
 	NsString _name;
 	NsString _imageName;
+	//BitmapImage _image;
 
 	NS_IMPLEMENT_INLINE_REFLECTION(Player, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("Player");
-		NsProp("Name", &Player::_name);
+		NsProp("Name1", &Player::_name);
+		NsProp("Name2", &Player::_name);
 		NsProp("ImageName", &Player::_imageName);
+		//NsProp("Image"), &Player::_image);
 	}
 
 };

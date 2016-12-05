@@ -12,7 +12,7 @@ MyNsTest::MyNsTest(){
 	//Noesis::GUI::LoadComponent(this, "fangxin.xaml");
 	//diffusePanel_ = FindName<StackPanel>("diffusePicPanel");
 	//initCollectionView();
-	Noesis::GUI::LoadComponent(this, "cslizi.xaml");
+	Noesis::GUI::LoadComponent(this, "zhaochuangtest.xaml");
 }
 
 MyNsTest::~MyNsTest(){
