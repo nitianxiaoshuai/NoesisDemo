@@ -15,6 +15,3 @@ MyNsTest::MyNsTest(){
 
 MyNsTest::~MyNsTest() {}
 
-Noesis::Image DataModel3::getiamge(NsString str) {
-	Noesis::Gui::Image();
-}

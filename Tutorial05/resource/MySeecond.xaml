@@ -21,33 +21,33 @@ x:Class="MyNsTest">
     <Button  Width="80" Height="80" Background="red" Margin="0,240,0,80" Template="{StaticResource ButtonTemplate}" Content="吊柜" HorizontalAlignment="Left"/>
     <Button  Width="80" Height="80" Background="red" Margin="0,320,0,0" Template="{StaticResource ButtonTemplate}" Content="移动" HorizontalAlignment="Right"/>
     <Button  Width="80" Height="80" Background="red" Margin="0,240,0,80" Template="{StaticResource ButtonTemplate}" Content="编辑" HorizontalAlignment="Right"/>
-    <ScrollViewer Margin="80,240,80,80" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+        <ScrollViewer Margin="80,240,80,80" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" background="red" Width="500" Height="80">
     </ScrollViewer>
-    <ScrollViewer Margin="80,320,80,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
-      <Grid Margin="0,0,0,0">
-        <Button Width="50" Height="50" Margin="0,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-        <Button Width="50" Height="50" Margin="80,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-        <Button Width="50" Height="50" Margin="160,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-        <Button Width="50" Height="50" Margin="240,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-        <Button Width="50" Height="50" Margin="320,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-        <Button Width="50" Height="50" Margin="400,0" HorizontalAlignment="Left">
-          <Image Source="hudie.png" Stretch="Fill"/>
-        </Button>
-      </Grid>
-    </ScrollViewer>
+    <Grid Margin="80,320,80,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+      <Grid.Resources>
+          <DataModel4 x:Name="dataModel" />
+          <DataTemplate x:Key="TaskTemplate2">
+            <Grid>
+              <Button  Width="60" Height="60" Grid.Row="0">
+                 <Imgage Source="{Binding ImageName}" Stretch="Fill"/>
+              </Button>
+            </Grid>
+          </DataTemplate>
+        </Grid.Resources>
+        <ListBox Height="60"
+             DataContext="{StaticResource dataModel}"
+        ItemsSource="{Binding ImageNN}"
+        ItemTemplate="{StaticResource TaskTemplate2}">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
 
     <Grid.Resources>
-      <DataModel3 x:Name="dataModel" />
+      <DataModel3 x:Name="dataModel1" />
       <DataTemplate x:Key="TaskTemplate">
         <Grid>
           <Button Content="{Binding Name}" Width="100" Height="30"
@@ -58,7 +58,7 @@ x:Class="MyNsTest">
     </Grid.Resources>
     <ListBox Height="30"
              Margin="80,120,80,160"
-             DataContext="{StaticResource dataModel}"
+             DataContext="{StaticResource dataModel1}"
         ItemsSource="{Binding Players}"
         ItemTemplate="{StaticResource TaskTemplate}">
       <ListBox.ItemsPanel>
@@ -67,6 +67,7 @@ x:Class="MyNsTest">
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
     </ListBox>
+  
   </Grid>
   
 </Grid>
