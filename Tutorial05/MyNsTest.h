@@ -17,15 +17,20 @@ class Shit1 : public Noesis::BaseComponent
 {
 public:
 	Shit1() {}
-	explicit Shit1(NsString name) : _name(name) { printf("shit1 ctor;"); }
+	explicit Shit1(NsString name) : _name(name), _imagePath("test.jpg")
+	{
+		printf("shit1 ctor;");
+	}
 
 private:
 	NsString _name;
+	NsString _imagePath;
 
 	NS_IMPLEMENT_INLINE_REFLECTION(Shit1, Noesis::BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("Shit1");
 		NsProp("Name", &Shit1::_name);
+		NsProp("ImagePath", &Shit1::_imagePath);
 	}
 };
 
@@ -38,6 +43,12 @@ public:
 		_shit1 = *new Noesis::ObservableCollection<Shit1>;
 		Noesis::Ptr<Shit1> shit11 = *new Shit1("haha");
 		_shit1->Add(shit11.GetPtr());
+		Noesis::Ptr<Shit1> shit12 = *new Shit1("haha");
+		_shit1->Add(shit12.GetPtr());
+		Noesis::Ptr<Shit1> shit13 = *new Shit1("haha");
+		_shit1->Add(shit13.GetPtr());
+		Noesis::Ptr<Shit1> shit14 = *new Shit1("haha");
+		_shit1->Add(shit14.GetPtr());
 	}
 
 private:
