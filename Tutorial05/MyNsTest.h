@@ -1,8 +1,8 @@
 #include <NoesisGUI.h>
-
+#include<wpframework.h>
 #include <stdio.h>
 #include <vector>
-
+#include<D3D11.h>
 class MyNsTest : public Noesis::Grid
 {
 public:
@@ -37,11 +37,17 @@ public:
 	{
 		_players = *new Noesis::ObservableCollection<Player>;
 		std::vector<NsString> nameVector{ "DDL","ssss2","DFG3","PPDLer4","PLKKJ","Pl" };
+		std::vector<Noesis::Image> imageVec = {getiamge("hudie.png"),getiamge("shenjian.png")};
+
 		for (NsInt i = 0; i < nameVector.size(); i++) {
 			Noesis::Ptr<Player> player = *new Player(nameVector[i]);
 			_players->Add(player.GetPtr());
 		}
+
+	
 	}
+
+	Noesis::Image getiamge(NsString str);
 
 private:
 	Noesis::Ptr< Noesis::ObservableCollection<Player> > _players;
