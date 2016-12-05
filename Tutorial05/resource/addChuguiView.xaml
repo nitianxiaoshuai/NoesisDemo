@@ -68,19 +68,19 @@
         <ScrollViewer Name="scrollTop" Margin="0, 0" Width="640"  Height="60" PanningMode="Both"  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
             <Grid x:Name="GridTop" Background="Gray" ShowGridLines="False" Height="60" Width="800">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="45"/>
+                      <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
+                       <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
                 <Button  Grid.Column="0" Grid.Row="0" Content="标题1" Style="{StaticResource ButtonStyle}"></Button>
                 <Button  Grid.Column="1" Grid.Row="0" Content="标题2" Style="{StaticResource ButtonStyle}"></Button>
