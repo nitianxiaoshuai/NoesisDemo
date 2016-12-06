@@ -6,9 +6,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
 
-
     <Grid.Resources>
         <Shit1Collection x:Name="Shit1Collection"/>
+        
         <DataTemplate x:Key="TaskTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -18,10 +18,10 @@
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
 
-                <Button Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="10">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="Uniform"/>
-                    </Button.Background>
+                <Button Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="10" Background="{Binding Brush}">
+                    <!--<Button.Background>
+                        <ImageBrush x:Name="Brush"  Stretch="Uniform"/>
+                    </Button.Background>-->
                 </Button>
             </Grid>
         </DataTemplate>
