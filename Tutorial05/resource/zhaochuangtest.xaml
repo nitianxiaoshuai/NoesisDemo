@@ -26,8 +26,7 @@
 			         <RowDefinition Height="35"/>
 				       <RowDefinition Height="15"/>
 			       </Grid.RowDefinitions>	 
-                <Button Width="50" Height="35" Grid.Row="0">
-			             <Image Source="{Binding ImageName}" Stretch="Fill"/>
+                <Button Width="50" Height="35" Grid.Row="0" Background="{Binding Image}">
                 </Button>
 			          <Button Content="{Binding Name2}" Width="50" Height="20" FontSize="10" Foreground="White" Grid.Row="1">
                 </Button>
