@@ -20,8 +20,8 @@
 #include <directxcolors.h>
 #include "resource.h"
 #include "NsManager.h"
-#include "MyNsTest.h"
-#include"MySeecond.h"
+
+
 #include"MyGod.h"
 
 using namespace DirectX;
@@ -257,9 +257,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         // Loads XAML and creates a view with it
         //Ptr<FrameworkElement> xaml = Noesis::GUI::LoadXaml<FrameworkElement>("PasswordBox.xaml");
 		Ptr<ResourceDictionary> theme = Noesis::GUI::LoadXaml<ResourceDictionary>("NoesisStyle.xaml");
-		Ptr<MyNsTest> nsTest = *new MyNsTest();
+		//Ptr<MyNsTest> nsTest = *new MyNsTest();
 		//Ptr<MySeecond> nsTest = *new MySeecond();
-		//Ptr<MyGod> nsTest = *new MyGod();
+		Ptr<MyNsTest> nsTest = *new MyNsTest();
 		g_XamlView = Noesis::GUI::CreateView(nsTest.GetPtr(), theme.GetPtr());
         g_XamlView->SetSize(g_Width, g_Height);
         g_XamlView->SetAntialiasingMode(Noesis::Gui::AntialiasingMode_PPAA);

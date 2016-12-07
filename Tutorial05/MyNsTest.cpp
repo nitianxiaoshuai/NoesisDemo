@@ -8,10 +8,10 @@
 using namespace Noesis;
 using namespace Gui;
 
-MyNsTest::MyNsTest(){
+MyNsTesta::MyNsTesta(){
 	Noesis::GUI::LoadComponent(this, "MySeecond.xaml");
 
 }
 
-MyNsTest::~MyNsTest() {}
+MyNsTesta::~MyNsTesta() {}
 

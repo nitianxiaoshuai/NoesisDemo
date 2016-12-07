@@ -3,14 +3,14 @@
 #include <stdio.h>
 #include <vector>
 #include<D3D11.h>
-class MyNsTest : public Noesis::Grid
+class MyNsTesta : public Noesis::Grid
 {
 public:
-	MyNsTest();
-	~MyNsTest();
-	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
+	MyNsTesta();
+	~MyNsTesta();
+	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTesta, Noesis::Grid)
 	{
-		NsMeta<Noesis::TypeId>("MyNsTest");
+		NsMeta<Noesis::TypeId>("MyNsTesta");
 	}
 };
 class Player : public Noesis::BaseComponent
@@ -57,16 +57,20 @@ public:
 			Noesis::Ptr<Player> player = *new Player(nameVector[i]);
 			_players->Add(player.GetPtr());
 		}
+	
 
 	}
 private:
 	Noesis::Ptr< Noesis::ObservableCollection<Player> > _players;
 
 
+
 	NS_IMPLEMENT_INLINE_REFLECTION(DataModel3, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("DataModel3");
 		NsProp("Players", &DataModel3::_players);
+	
+
 	}
 };
 
@@ -84,13 +88,31 @@ public:
 			Noesis::Ptr<ImageN> img = *new ImageN(imageNameV[i]);
 			_imageN->Add(img.GetPtr());
 		}
+		
+
+		_images = *new Noesis::ObservableCollection<Noesis::Image>;
+		std::vector<Noesis::Ptr<Noesis::BitmapImage>> imgeV{ getImages("hudie.png"),getImages("hudie.png"), getImages("hudie.png"), getImages("hudie.png")};
+		
+		
 	}
 private:
 	Noesis::Ptr< Noesis::ObservableCollection<ImageN> > _imageN;
+	Noesis::Ptr<Noesis::ObservableCollection<Noesis::Image> > _images;
+
+	Noesis::Ptr<Noesis::BitmapImage> getImages(NsString str)
+	{
+		Noesis::Ptr<Noesis::BitmapImage> image = *new Noesis::BitmapImage("dapao.png");
+		auto x = image->GetDpiX();
+		auto y = image->GetDpiY();
+		auto width = image->GetWidth();
+		auto height = image->GetHeight();
+		return image;
+	};
 
 	NS_IMPLEMENT_INLINE_REFLECTION(DataModel4, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("DataModel4");
 		NsProp("ImageNN", &DataModel4::_imageN);
+		NsProp("ImageS", &DataModel4::_images);
 	}
 };

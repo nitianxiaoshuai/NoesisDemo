@@ -22,11 +22,11 @@ NsManager* NsManager::getSingleton(){
 
 void NsManager::NsRegisterReflection(bool registerComponents)
 {
-	NS_REGISTER_COMPONENT(MyNsTest)
+		NS_REGISTER_COMPONENT(MyNsTest)
+		NS_REGISTER_COMPONENT(Shit1Collection)
+		NS_REGISTER_COMPONENT(Shit1)
 		NS_REGISTER_COMPONENT(DataModel3)
-		NS_REGISTER_COMPONENT(DataModel4)
 		NS_REGISTER_COMPONENT(Player)
-		NS_REGISTER_COMPONENT(ImageN)
 
 		//NS_REGISTER_COMPONENT(ModelThree)
 }

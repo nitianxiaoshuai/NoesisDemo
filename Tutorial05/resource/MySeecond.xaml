@@ -24,27 +24,6 @@ x:Class="MyNsTest">
         <ScrollViewer Margin="80,240,80,80" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" background="red" Width="500" Height="80">
     </ScrollViewer>
     <Grid Margin="80,320,80,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
-      <Grid.Resources>
-          <DataModel4 x:Name="dataModel" />
-          <DataTemplate x:Key="TaskTemplate2">
-            <Grid>
-              <Button  Width="60" Height="60" Grid.Row="0">
-                 <Imgage Source="{Binding ImageName}" Stretch="Fill"/>
-              </Button>
-            </Grid>
-          </DataTemplate>
-        </Grid.Resources>
-        <ListBox Height="60"
-             DataContext="{StaticResource dataModel}"
-        ItemsSource="{Binding ImageNN}"
-        ItemTemplate="{StaticResource TaskTemplate2}">
-          <ListBox.ItemsPanel>
-            <ItemsPanelTemplate>
-              <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
-            </ItemsPanelTemplate>
-          </ListBox.ItemsPanel>
-        </ListBox>
-    </Grid>
 
     <Grid.Resources>
       <DataModel3 x:Name="dataModel1" />
