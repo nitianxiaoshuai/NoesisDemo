@@ -7,55 +7,33 @@
         Title="MainWindow" Height="350" Width="525">
 
     <Grid.Resources>
-        <Shit1Collection x:Name="Shit1Collection2"/>
+        <Shit1Collection x:Name="Shit1Collection"/>
         
         <DataTemplate x:Key="TaskTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="1"/>
+                <Button Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="10" Background="{Binding Brush}">
+                    <!--<Button.Background>
+                        <ImageBrush x:Name="Brush"  Stretch="Uniform"/>
+                    </Button.Background>-->
+                </Button>
             </Grid>
         </DataTemplate>
     </Grid.Resources>
 
-    <ListBox Height="100" DataContext="{StaticResource Shit1Collection2}"
+    <ListBox Height="300" DataContext="{StaticResource Shit1Collection}"
         ItemsSource="{Binding Shit1s}"
-        ItemTemplate="{StaticResource TaskTemplate}" />
+        ItemTemplate="{StaticResource TaskTemplate}">
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+    </ListBox>
 </Grid> 
-<!--<Grid
-    x:Class="MyNsTest"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Width="600">
-
-    <Grid.Resources>
-        <DataModel3 x:Name="dataModel" />
-
-        <DataTemplate x:Key="TaskTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
-                </Grid.ColumnDefinitions>
-
-                <Rectangle Width="15" Height="10" Fill="{Binding Color}" Stroke="Transparent" StrokeThickness="0"
-                    Margin="5, 0, 5, 0" Grid.Column="0"/>
-                <TextBlock Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="1"/>
-                <TextBlock Text="{Binding Scale, StringFormat=P0}" Margin="5, 0, 5, 0" Grid.Column="2"/>
-                <TextBlock Text="{Binding Pos}" Margin="5, 0, 5, 0" Grid.Column="3"/>
-            </Grid>
-        </DataTemplate>
-    </Grid.Resources>
-
-    <ListBox Height="100" DataContext="{StaticResource dataModel}"
-        ItemsSource="{Binding Players}"
-        ItemTemplate="{StaticResource TaskTemplate}" />
-
-</Grid>-->
