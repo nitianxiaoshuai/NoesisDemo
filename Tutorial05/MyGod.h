@@ -1,5 +1,8 @@
 #include <NoesisGUI.h>
-
+#include<wpframework.h>
+#include <stdio.h>
+#include <vector>
+#include<D3D11.h>
 #define printf(x) OutputDebugStringA(x)
 class MyNsTest : public Noesis::Grid
 {
@@ -84,7 +87,7 @@ private:
 	NS_IMPLEMENT_INLINE_REFLECTION(Player, BaseComponent)
 	{
 		NsMeta<Noesis::TypeId>("Player");
-		NsProp("Name", &Player::_name);
+		NsProp("TitleName", &Player::_name);
 
 	}
 
@@ -97,7 +100,6 @@ public:
 	{
 		_players = *new Noesis::ObservableCollection<Player>;
 		std::vector<NsString> nameVector{ "DDL","ssss2","DFG3","PPDLer4","PLKKJ","Pl" };
-
 		for (NsInt i = 0; i < nameVector.size(); i++) {
 			Noesis::Ptr<Player> player = *new Player(nameVector[i]);
 			_players->Add(player.GetPtr());
@@ -112,6 +114,51 @@ private:
 		NsProp("Players", &DataModel3::_players);
 	}
 };
+
+class MyTouch : public Noesis::Grid
+{
+public:
+	MyTouch() {};
+	~MyTouch() {};
+
+	void OnManipulationStarting(const Noesis::ManipulationStartingEventArgs& e)
+	{
+		e.mode = Noesis::ManipulationModes_All;
+		e.manipulationContainer = (Noesis::Visual*) FindName("root");
+		e.handled = true;
+	}
+
+	void OnManipulationInertiaStarting(const Noesis::ManipulationInertiaStartingEventArgs& e)
+	{
+		e.translationBehavior.desiredDeceleration = 100.0f / (1000.0f * 1000.0f);
+		e.rotationBehavior.desiredDeceleration = 360.0f / (1000.0f * 1000.0f);
+		e.expansionBehavior.desiredDeceleration = 300.0f / (1000.0f * 1000.0f);
+		e.handled = true;
+	}
+
+	void OnManipulationDelta(const Noesis::ManipulationDeltaEventArgs& e)
+	{
+		Noesis::UIElement* rectangle = (Noesis::UIElement*)e.source;
+		Noesis::MatrixTransform* tr = (Noesis::MatrixTransform*)rectangle->GetRenderTransform();
+		Noesis::Transform2f mtx = tr->GetMatrix();
+
+		mtx.RotateAt(e.deltaManipulation.rotation * Noesis::DegToRad_f, e.manipulationOrigin.x,
+			e.manipulationOrigin.y);
+		mtx.ScaleAt(e.deltaManipulation.scale, e.deltaManipulation.scale,
+			e.manipulationOrigin.x, e.manipulationOrigin.y);
+		mtx.Translate(e.deltaManipulation.translation.x, e.deltaManipulation.translation.y);
+
+		tr->SetMatrix(mtx);
+		e.handled = true;
+	}
+
+private:
+	NS_IMPLEMENT_INLINE_REFLECTION(MyTouch, Noesis::Grid)
+	{
+		NsMeta<Noesis::TypeId>("MyTouch");
+	}
+};
+
 
 
 

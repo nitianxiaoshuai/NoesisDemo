@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "NsManager.h"
-#include "MyNsTest.h"
 #include"MySeecond.h"
 #include"MyGod.h"
 
@@ -27,6 +26,5 @@ void NsManager::NsRegisterReflection(bool registerComponents)
 		NS_REGISTER_COMPONENT(Shit1)
 		NS_REGISTER_COMPONENT(DataModel3)
 		NS_REGISTER_COMPONENT(Player)
-
-		//NS_REGISTER_COMPONENT(ModelThree)
+			NS_REGISTER_COMPONENT(MyTouch)
 }

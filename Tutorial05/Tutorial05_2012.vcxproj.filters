@@ -19,7 +19,6 @@
     <ClCompile Include="Renderers\D3D11\D3D11RenderDevice.cpp">
       <Filter>RenderDevice</Filter>
     </ClCompile>
-    <ClCompile Include="MyNsTest.cpp" />
     <ClCompile Include="NsManager.cpp" />
   </ItemGroup>
   <ItemGroup>

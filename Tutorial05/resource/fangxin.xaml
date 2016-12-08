@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="600">
 
 
   <Grid Width="600" Height="400" Margin="0,0,0,0" Background="#FFEAD2D2">
@@ -26,28 +26,28 @@
     <Button  Width="80" Height="80" Background="red" Margin="0,240,0,80" Template="{StaticResource ButtonTemplate}" Content="吊柜" HorizontalAlignment="Left"/>
     <Button  Width="80" Height="80" Background="red" Margin="0,320,0,0" Template="{StaticResource ButtonTemplate}" Content="移动" HorizontalAlignment="Right"/>
     <Button  Width="80" Height="80" Background="red" Margin="0,240,0,80" Template="{StaticResource ButtonTemplate}" Content="编辑" HorizontalAlignment="Right"/>
-    <ScrollViewer Margin="80,240,80,80" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" background="red" Width="500" Height="80">
+    <ScrollViewer Margin="80,320,80,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" background="red" Width="500" Height="80">
 
-     <Grid>
+     <Grid Margin="0,0,0,0">
       <Grid.Resources>
         <Shit1Collection x:Name="Shit1Collection"/>
 
         <DataTemplate x:Key="TaskTemplate">
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="100"/>
+              <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-              <RowDefinition Height="100"/>
+              <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
-            <Button Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="10" Background="{Binding Brush}">
+            <Button Text="{Binding Name}" Margin="5, 0, 5, 0" Grid.Column="10" Background="{Binding Brush}" MouseLeftButtonDown="canvas2_MouseDown"   MouseMove="canvas2_MouseMove" MouseLeftButtonUp="canvas2_MouseLeftButtonUp">
             </Button>
           </Grid>
         </DataTemplate>
       </Grid.Resources>
 
-      <ListBox Height="300" DataContext="{StaticResource Shit1Collection}"
+      <ListBox Height="80" DataContext="{StaticResource Shit1Collection}"
           ItemsSource="{Binding Shit1s}"
           ItemTemplate="{StaticResource TaskTemplate}">
         <ListBox.ItemsPanel>
@@ -60,13 +60,13 @@
     </ScrollViewer>
     
     
-    <Grid Margin="80,320,80,0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+    <Grid Margin="80,210,80,160" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Center" Background="red">
 
       <Grid.Resources>
         <DataModel3 x:Name="dataModel1" />
-        <DataTemplate x:Key="TaskTemplate">
+        <DataTemplate x:Key="TaskTemplate34">
           <Grid>
-            <Button Content="{Binding Name}" Width="100" Height="30"
+            <Button Content="{Binding TitleName}" Width="100" Height="30"
                     Foreground="White" Grid.Row="1">
             </Button>
           </Grid>
@@ -76,7 +76,7 @@
                Margin="80,120,80,160"
                DataContext="{StaticResource dataModel1}"
           ItemsSource="{Binding Players}"
-          ItemTemplate="{StaticResource TaskTemplate}">
+          ItemTemplate="{StaticResource TaskTemplate34}">
         <ListBox.ItemsPanel>
           <ItemsPanelTemplate>
             <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
@@ -87,6 +87,8 @@
     </Grid>
 
   </Grid>
-  
-  
+  <Canvas x:Name="root">
+    <Rectangle Fill="Red" Width="80" Height="80" Margin="160,320,0,0" RenderTransform="1 2 2 1 50 50" IsManipulationEnabled="True"/>
+    <Rectangle Fill="Blue" Width="80" Height="80"  Margin="260,320,0,0" RenderTransform="1 2 2 1 50 50" IsManipulationEnabled="True"/>
+  </Canvas>
 </Grid>
