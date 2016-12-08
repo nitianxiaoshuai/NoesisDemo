@@ -31,11 +31,19 @@ public:
 		rewind(f);
 		NsByte * buffer = static_cast<NsByte *>(malloc(sizeof(unsigned char)*buffer_size));
 		fread(buffer, 1, buffer_size, f);
+		/*
 		Noesis::Ptr<Noesis::BitmapSource> source = Noesis::BitmapSource::Create(
 			width, height, x,
 			// @BUG: buffer is not BGRA32 formatted. to be solved
 			y, buffer, buffer_size, width/8);
-		_brush = *new Noesis::ImageBrush(source.GetPtr());
+			*/
+		Noesis::Ptr<Noesis::BitmapSource> source = Noesis::BitmapSource::Create(
+			width, height, x,
+			// @BUG: buffer is not BGRA32 formatted. to be solved
+			y, buffer, buffer_size, width / 8);
+		//_brush = *new Noesis::ImageBrush(source.GetPtr());
+	
+		_brush = *new Noesis::ImageBrush(image.GetPtr());
 		printf("shit1 ctor;");
 	}
 
