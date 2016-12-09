@@ -87,6 +87,7 @@
     </Grid>
 
   </Grid>
+  <Thumb Name="thumb1" Background="Red" Height="50" Width="100" DragDelta="DragDelta" DragStarted="DragStarted" DragCompleted="DragCompleted" Canvas.Left="335" Canvas.Top="121" />  
   <Canvas x:Name="root">
     <Rectangle Fill="Red" Width="80" Height="80" Margin="160,320,0,0" RenderTransform="1 2 2 1 50 50" IsManipulationEnabled="True"/>
     <Rectangle Fill="Blue" Width="80" Height="80"  Margin="260,320,0,0" RenderTransform="1 2 2 1 50 50" IsManipulationEnabled="True"/>

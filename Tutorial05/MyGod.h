@@ -3,14 +3,64 @@
 #include <stdio.h>
 #include <vector>
 #include<D3D11.h>
+#include "pch.h"
+#include "Include\NsGui\Style.h"
+#include "Include\NsGui\UIElementCollection.h"
+#include "Include\NsGui\ColumnDefinition.h"
+#include "Include\NsCore\DelegateGenerator.h"
 #define printf(x) OutputDebugStringA(x)
+using namespace Noesis;
 class MyNsTest : public Noesis::Grid
 {
 public:
-	MyNsTest() {
+	MyNsTest() 
+	{
 		Noesis::GUI::LoadComponent(this, "fangxin.xaml");
-	};
+		std::string str = "title";
+		for (int i = 0; i < 20; i++) {
+			gridTopData_.push_back(str + std::to_string(i));
+		}
+		reloadView();
+	}
+
 	~MyNsTest() {};
+	Noesis::Grid *gridTop_;
+	std::vector<std::string> gridTopData_;
+	//https://msdn.microsoft.com/zh-cn/library/vs/alm/ms752271(v=vs.110).aspx
+	void reloadView() {
+		gridTop_ = FindName<Grid>("GridTop");
+		gridTop_->GetRowDefinitions()->Clear();
+		gridTop_->GetColumnDefinitions()->Clear();
+
+		Noesis::Style *style = GetResources()->FindName<Noesis::Style>("ButtonStyle");
+		Noesis::Ptr<Noesis::RowDefinition> row = *new Noesis::RowDefinition();
+		row->SetHeight(45);
+		gridTop_->GetRowDefinitions()->Add(row.GetPtr());
+
+		for (int i = 0; i < gridTopData_.size(); i++) {
+			Noesis::Ptr<Noesis::ColumnDefinition> column = *new Noesis::ColumnDefinition();
+			column->SetWidth(80);
+			gridTop_->GetColumnDefinitions()->Add(column.GetPtr());
+
+			Noesis::Ptr<Noesis::Button> btn = *new Noesis::Button();
+			btn->SetStyle(style);
+			btn->SetContent(gridTopData_[i].c_str());
+
+			gridTop_->SetRow(btn.GetPtr(), 0);
+			gridTop_->SetColumn(btn.GetPtr(), i);
+
+			gridTop_->GetChildren()->Add(btn.GetPtr());
+		}
+		Noesis::Button *btn = FindName<Noesis::Button>("Button1");
+		btn->MouseDown += Noesis::Core::MakeDelegate(&myMouseButtonDown);
+		btn->MouseUp += Noesis::Core::MakeDelegate(myMouseButtonUp);
+		btn->MouseMove += Noesis::Core::MakeDelegate(myMouseButtonMove);
+		btn->Click += Noesis::Core::Delegate(myMouseButtonDown);
+	};
+
+	void myMouseButtonDown(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
+	void myMouseButtonUp(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
+	void myMouseButtonMove(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
 
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
 	{
