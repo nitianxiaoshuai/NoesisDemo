@@ -17,8 +17,10 @@
     <Grid.Resources>
         <DataModel3 x:Name="dataModel" />
         <DataTemplate x:Key="TaskTemplate1">
-			      <Button Content="{Binding Name1}" Width="100" Height="30" Foreground="White">
+        <Grid>
+			      <Button Content="{Binding Name1}" Margin="0,0,0,0">
             </Button>
+        </Grid>
         </DataTemplate>
         <DataTemplate x:Key="TaskTemplate2">
 		       <Grid>
@@ -26,7 +28,7 @@
 			         <RowDefinition Height="35"/>
 				       <RowDefinition Height="15"/>
 			       </Grid.RowDefinitions>	 
-                <Button Width="50" Height="35" Grid.Row="0" Background="{Binding Image}">
+                <Button Width="50" Height="35" Grid.Row="0" Background="{Binding Brush}" IsManipulationEnabled="True" Click="Button_Click">
                 </Button>
 			          <Button Content="{Binding Name2}" Width="50" Height="20" FontSize="10" Foreground="White" Grid.Row="1">
                 </Button>
@@ -51,7 +53,7 @@
     </ItemsPanelTemplate>
     </ListBox.ItemsPanel>
     </ListBox>
-    <ListBox Height="60" Margin="100,140,100,0" DataContext="{StaticResource dataModel}"
+    <ListBox x:Name="ListView1" Height="60" Margin="100,140,100,0" DataContext="{StaticResource dataModel}"
         ItemsSource="{Binding Players}"
         ItemTemplate="{StaticResource TaskTemplate2}">
         <ListBox.ItemsPanel>

@@ -9,7 +9,9 @@ public:
 	~MyNsTest();
 	//Noesis::StackPanel* diffusePanel_;
 	//void MyNsTest::initCollectionView();
-	//void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e);
+	void MyNsTest::butClick(Noesis::BaseComponent*sender, const Noesis::Gui::RoutedEventArgs& e);
+	void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e);
+	void MyNsTest::CreateView();
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
 	{
 		NsMeta<Noesis::TypeId>("MyNsTest");
@@ -34,7 +36,7 @@ public:
 		Noesis::Ptr<Noesis::BitmapSource> source = Noesis::BitmapSource::Create(
 			width, height, x, y, buffer, buffer_size, width / 8);
 		// @BUG: buffer is not BGRA32 formatted. to be solved
-		_brush = *new Noesis::ImageBrush(source.GetPtr());
+		_brush = *new Noesis::ImageBrush(image.GetPtr());
 	}
 
 private:
@@ -50,7 +52,7 @@ private:
 		NsProp("Name1", &Player::_name);
 		NsProp("Name2", &Player::_name);
 		NsProp("ImageName", &Player::_imageName);
-		NsProp("Image", &Player::_brush);
+		NsProp("Brush", &Player::_brush);
 	}
 
 };
