@@ -16,17 +16,16 @@ public:
 	MyNsTest() 
 	{
 		Noesis::GUI::LoadComponent(this, "fangxin.xaml");
-		std::string str = "title";
+		NsString str = "title";
 		for (int i = 0; i < 20; i++) {
-			gridTopData_.push_back(str + std::to_string(i));
+			gridTopData_.push_back(str + Noesis::ToString(i));
 		}
 		reloadView();
 	}
 
 	~MyNsTest() {};
 	Noesis::Grid *gridTop_;
-	std::vector<std::string> gridTopData_;
-	//https://msdn.microsoft.com/zh-cn/library/vs/alm/ms752271(v=vs.110).aspx
+	std::vector<NsString> gridTopData_;
 	void reloadView() {
 		gridTop_ = FindName<Grid>("GridTop");
 		gridTop_->GetRowDefinitions()->Clear();
@@ -52,10 +51,10 @@ public:
 			gridTop_->GetChildren()->Add(btn.GetPtr());
 		}
 		Noesis::Button *btn = FindName<Noesis::Button>("Button1");
-		btn->MouseDown += Noesis::Core::MakeDelegate(&myMouseButtonDown);
-		btn->MouseUp += Noesis::Core::MakeDelegate(myMouseButtonUp);
-		btn->MouseMove += Noesis::Core::MakeDelegate(myMouseButtonMove);
-		btn->Click += Noesis::Core::Delegate(myMouseButtonDown);
+		btn->MouseDown += Noesis::Core::MakeDelegate(this,&myMouseButtonDown);
+		btn->MouseUp += Noesis::Core::MakeDelegate(this, &myMouseButtonUp);
+		btn->MouseMove += Noesis::Core::MakeDelegate(this,&myMouseButtonMove);
+		btn->Click() += Noesis::Core::MakeDelegate(this,&myMouseButtonDown);
 	};
 
 	void myMouseButtonDown(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
