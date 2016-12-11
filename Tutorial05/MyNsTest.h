@@ -9,9 +9,12 @@ public:
 	~MyNsTest();
 	//Noesis::StackPanel* diffusePanel_;
 	//void MyNsTest::initCollectionView();
-	void MyNsTest::butClick(Noesis::BaseComponent*sender, const Noesis::Gui::RoutedEventArgs& e);
+	
+	void MyNsTest::MouseUpEvent(Noesis::BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e);
+	void MyNsTest::myMouseButtonMove(Noesis::BaseComponent* sender, const  Noesis::Gui::MouseEventArgs& e);
 	void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e);
-	void MyNsTest::CreateView();
+	Noesis::Drawing::Thickness MyNsTest::getMovesMargin(Noesis::Point curPoint);
+    Noesis::Gui::Button *button1_;
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
 	{
 		NsMeta<Noesis::TypeId>("MyNsTest");
@@ -33,8 +36,7 @@ public:
 		rewind(f);
 		NsByte * buffer = static_cast<NsByte *>(malloc(sizeof(unsigned char)*buffer_size));
 		fread(buffer, 1, buffer_size, f);
-		Noesis::Ptr<Noesis::BitmapSource> source = Noesis::BitmapSource::Create(
-			width, height, x, y, buffer, buffer_size, width / 8);
+		Noesis::Ptr<Noesis::BitmapSource> source = Noesis::BitmapSource::Create(width, height, x, y, buffer, buffer_size, width / 8);
 		// @BUG: buffer is not BGRA32 formatted. to be solved
 		_brush = *new Noesis::ImageBrush(image.GetPtr());
 	}
@@ -64,6 +66,7 @@ public:
 	{
 		_players = *new Noesis::ObservableCollection<Player>;
 		std::vector<NsString> nameVector{"Player1","Player2","Player3","Player4","Player5","Player6","Player7","Player8","Player9","Player10","Player11","Player12","Player13","Player14", "Player15"};
+		//std::vector<NsString> btnNameVector{ "btnName1","btnName2","btnName3","btnName4","btnName5","btnName6","btnName7","btnName8","btnName9","btnName10","btnName11","btnName12","btnName13","btnName14", "btnName15" };
 		//std::vector<NsString> imageName{"shenjian.png","dianchui.png"};
 		for (NsInt i = 0; i < nameVector.size(); i++) {
 			//NsString imgName = "";

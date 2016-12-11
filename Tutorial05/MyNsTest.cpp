@@ -8,14 +8,13 @@
 using namespace Noesis;
 
 MyNsTest::MyNsTest(){
-	this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
+	//this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
 	//Noesis::GUI::LoadComponent(this, "fangxin.xaml");
 	//diffusePanel_ = FindName<StackPanel>("diffusePicPanel");
 	//initCollectionView();
 	Noesis::GUI::LoadComponent(this, "zhaochuangtest.xaml");
-	Noesis::Gui::Button * but = FindName<Noesis::Gui::Button>("but3");
-	but->Click() += butClick;
-	CreateView();
+	Noesis::Gui::Button * but = FindName<Noesis::Gui::Button>("btn2");
+	but->MouseUp() += MakeDelegate(this, &MyNsTest::MouseUpEvent);
 }
 
 MyNsTest::~MyNsTest(){
@@ -24,9 +23,46 @@ void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventA
 
 }
 
-void MyNsTest::butClick(Noesis::BaseComponent*sender, const Noesis::Gui::RoutedEventArgs& e) {
+void MyNsTest::MouseUpEvent(Noesis::BaseComponent*sender, const Noesis::Gui::MouseButtonEventArgs& e) {
 	printf("111111111111111111111111111");
+	Noesis::Grid* mainGrid = FindName<Noesis::Grid>("mainGrid");
+	Noesis::Point p = mainGrid->PointFromScreen(e.position);
+	Noesis::Gui::UIElementCollection* collection = mainGrid->GetChildren();
+	Noesis::Ptr<Noesis::BitmapImage> image = *new Noesis::BitmapImage("shenjian.png");
+	Ptr<Noesis::Gui::Button> singleView = *new Noesis::Gui::Button();
+	singleView->SetHorizontalAlignment(HorizontalAlignment_Left);
+	singleView->SetVerticalAlignment(VerticalAlignment_Top);
+	singleView->SetWidth(80);
+	singleView->SetHeight(80);
+	Noesis::Drawing::Thickness tmpmargin = this->getMovesMargin(p);
+	singleView->SetMargin(tmpmargin);
+	Noesis::Ptr<Noesis::ImageBrush> brush = *new Noesis::ImageBrush(image.GetPtr());
+	singleView->SetBackground(brush.GetPtr());
+	collection->Add(singleView.GetPtr());
+	button1_ = singleView.GetPtr();
+	button1_->MouseMove() += MakeDelegate(this, &MyNsTest::myMouseButtonMove);
 }
+
+void MyNsTest::myMouseButtonMove(Noesis::BaseComponent* sender, const  Noesis::Gui::MouseEventArgs& e) {
+	Noesis::Grid* mainGrid = FindName<Noesis::Grid>("mainGrid");
+	Noesis::Point p = mainGrid->PointFromScreen(e.position);
+	Noesis::Drawing::Thickness tmpmargin = this->getMovesMargin(p);
+	button1_->SetMargin(tmpmargin);
+}
+
+Noesis::Drawing::Thickness MyNsTest::getMovesMargin(Noesis::Point curPoint)
+{
+	Noesis::Grid* mainGrid = FindName<Noesis::Grid>("mainGrid");
+	NsSize width = mainGrid->GetWidth();
+	NsSize height = mainGrid->GetHeight();
+	Noesis::Drawing::Thickness tmpmargin;
+	tmpmargin.left = curPoint.x-40;
+	tmpmargin.top = curPoint.y-40;
+	tmpmargin.bottom = 0;
+	tmpmargin.right = 0;
+	return tmpmargin;
+}
+
 
 /*void MyNsTest::initCollectionView() {
 
@@ -42,15 +78,3 @@ void MyNsTest::butClick(Noesis::BaseComponent*sender, const Noesis::Gui::RoutedE
 		collection->Add(cell.GetPtr());
 	}
 }*/
-
-void MyNsTest::CreateView() {
-	Noesis::Grid* diffuseGrid = FindName<Noesis::Grid>("mainGrid");
-	Noesis::Gui::UIElementCollection* collection = diffuseGrid->GetChildren();
-	Noesis::Ptr<Noesis::BitmapImage> image = *new Noesis::BitmapImage("shenjian.png");
-	Ptr<Noesis::Gui::Button> singleView = *new Noesis::Gui::Button();
-	singleView->SetWidth(80);
-	singleView->SetHeight(80);
-	Noesis::Ptr<Noesis::ImageBrush> brush = *new Noesis::ImageBrush(image.GetPtr());
-	singleView->SetBackground(brush.GetPtr());
-	collection->Add(singleView.GetPtr());
-}
