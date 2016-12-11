@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include<D3D11.h>
+#include <string>
 #include "pch.h"
 #include "Include\NsGui\Style.h"
 #include "Include\NsGui\UIElementCollection.h"
@@ -16,16 +17,19 @@ public:
 	MyNsTest() 
 	{
 		Noesis::GUI::LoadComponent(this, "fangxin.xaml");
-		NsString str = "title";
+		std::string str = "title";
 		for (int i = 0; i < 20; i++) {
-			gridTopData_.push_back(str + Noesis::ToString(i));
+			gridTopData_.push_back(str + std::to_string(i));
 		}
 		reloadView();
-	}
+	};
 
 	~MyNsTest() {};
 	Noesis::Grid *gridTop_;
-	std::vector<NsString> gridTopData_;
+	Noesis::Canvas* canvas_;
+	Noesis::StackPanel *picPanel_;
+	std::vector<std::string> gridTopData_;
+	Noesis::Point originPoint_;
 	void reloadView() {
 		gridTop_ = FindName<Grid>("GridTop");
 		gridTop_->GetRowDefinitions()->Clear();
@@ -51,15 +55,29 @@ public:
 			gridTop_->GetChildren()->Add(btn.GetPtr());
 		}
 		Noesis::Button *btn = FindName<Noesis::Button>("Button1");
-		btn->MouseDown += Noesis::Core::MakeDelegate(this,&myMouseButtonDown);
-		btn->MouseUp += Noesis::Core::MakeDelegate(this, &myMouseButtonUp);
-		btn->MouseMove += Noesis::Core::MakeDelegate(this,&myMouseButtonMove);
-		btn->Click() += Noesis::Core::MakeDelegate(this,&myMouseButtonDown);
+		btn->MouseDown() += MakeDelegate(this, &MyNsTest::myMouseButtonDown);
+		btn->MouseUp() += MakeDelegate(this, &MyNsTest::myMouseButtonUp);
+		btn->MouseMove() += MakeDelegate(this, &MyNsTest::myMouseButtonMove);
+	
 	};
 
-	void myMouseButtonDown(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
-	void myMouseButtonUp(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
-	void myMouseButtonMove(BaseComponent* sender, const Noesis::Gui::RoutedEventArgs& e) {};
+	void myMouseButtonDown(BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e) {
+		canvas_ = FindName<Canvas>("scrollBotton");
+		Button *btn = FindName<Button>("Button1");
+		btn->SetMargin(20);
+	
+	};
+	void myMouseButtonUp(BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e) {
+		Button *btn = (Button *)sender;
+		canvas_->SetLeft(btn, e.position.x - btn->GetWidth());
+		canvas_->SetTop(btn, e.position.y - btn->GetHeight());
+	};
+	void myMouseButtonMove(BaseComponent* sender, const Noesis::Gui::MouseEventArgs& e) {
+		Button *btn = FindName<Button>("Button1");
+		Noesis::Point p = btn->PointFromScreen(e.position);
+		btn->SetMaxHeight(50);
+		btn->SetMaxWidth(50);
+	};
 
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
 	{
