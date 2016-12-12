@@ -17,67 +17,111 @@ public:
 	MyNsTest() 
 	{
 		Noesis::GUI::LoadComponent(this, "fangxin.xaml");
-		std::string str = "title";
-		for (int i = 0; i < 20; i++) {
-			gridTopData_.push_back(str + std::to_string(i));
-		}
-		reloadView();
+		
+		diffusePanel_ = FindName<StackPanel>("panel");
+		initCollectionView();
+		this->Initialized() += MakeDelegate(this, &MyNsTest::OnInitialized);
 	};
 
 	~MyNsTest() {};
-	Noesis::Grid *gridTop_;
-	Noesis::Canvas* canvas_;
-	Noesis::StackPanel *picPanel_;
-	std::vector<std::string> gridTopData_;
-	Noesis::Point originPoint_;
-	void reloadView() {
-		gridTop_ = FindName<Grid>("GridTop");
-		gridTop_->GetRowDefinitions()->Clear();
-		gridTop_->GetColumnDefinitions()->Clear();
 
-		Noesis::Style *style = GetResources()->FindName<Noesis::Style>("ButtonStyle");
-		Noesis::Ptr<Noesis::RowDefinition> row = *new Noesis::RowDefinition();
-		row->SetHeight(45);
-		gridTop_->GetRowDefinitions()->Add(row.GetPtr());
+	Noesis::Gui::Button *button1_;
+	Noesis::Gui::Button *button2_;
+	Noesis::StackPanel* diffusePanel_;
+	void OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e) {
 
-		for (int i = 0; i < gridTopData_.size(); i++) {
-			Noesis::Ptr<Noesis::ColumnDefinition> column = *new Noesis::ColumnDefinition();
-			column->SetWidth(80);
-			gridTop_->GetColumnDefinitions()->Add(column.GetPtr());
-
-			Noesis::Ptr<Noesis::Button> btn = *new Noesis::Button();
-			btn->SetStyle(style);
-			btn->SetContent(gridTopData_[i].c_str());
-
-			gridTop_->SetRow(btn.GetPtr(), 0);
-			gridTop_->SetColumn(btn.GetPtr(), i);
-
-			gridTop_->GetChildren()->Add(btn.GetPtr());
-		}
-		Noesis::Button *btn = FindName<Noesis::Button>("Button1");
-		btn->MouseDown() += MakeDelegate(this, &MyNsTest::myMouseButtonDown);
-		btn->MouseUp() += MakeDelegate(this, &MyNsTest::myMouseButtonUp);
-		btn->MouseMove() += MakeDelegate(this, &MyNsTest::myMouseButtonMove);
-	
-	};
-
+	}
 	void myMouseButtonDown(BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e) {
-		canvas_ = FindName<Canvas>("scrollBotton");
-		Button *btn = FindName<Button>("Button1");
-		btn->SetMargin(20);
+		if (e.leftButton == MouseButtonState_Pressed) {
+			Noesis::Grid* mainGrid = FindName<Noesis::Grid>("mainSrceen");
+			Noesis::Point p = mainGrid->PointFromScreen(e.position);
+			Noesis::Gui::UIElementCollection* collection = mainGrid->GetChildren();
+			Noesis::Ptr<Noesis::BitmapImage> image = *new Noesis::BitmapImage("hudie.png");
+			Ptr<Noesis::Gui::Button> singleView = *new Noesis::Gui::Button();
+			singleView->SetHorizontalAlignment(HorizontalAlignment_Left);
+			singleView->SetVerticalAlignment(VerticalAlignment_Top);
+			singleView->SetWidth(80);
+			singleView->SetHeight(80);
+			Noesis::Drawing::Thickness tmpmargin = this->getMovesMargin(p);
+			singleView->SetMargin(tmpmargin);
+			Noesis::Ptr<Noesis::ImageBrush> brush = *new Noesis::ImageBrush(image.GetPtr());
+			singleView->SetBackground(brush.GetPtr());
+			collection->Add(singleView.GetPtr());
+			button1_ = singleView.GetPtr();
+			button1_->MouseMove() += MakeDelegate(this, &MyNsTest::myMouseButtonMove);
+			button1_->MouseUp() += MakeDelegate(this, &MyNsTest::myMouseButtonUp);
+		}
 	
 	};
 	void myMouseButtonUp(BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e) {
-		Button *btn = (Button *)sender;
-		canvas_->SetLeft(btn, e.position.x - btn->GetWidth());
-		canvas_->SetTop(btn, e.position.y - btn->GetHeight());
+		Noesis::Grid* mianScrren = FindName<Noesis::Grid>("mainSrceen");
+		mianScrren->GetChildren()->Remove(button1_);
+
+		Noesis::Point p = mianScrren->PointFromScreen(e.position);
+		Noesis::Grid* midgrid = FindName<Noesis::Grid>("midgrid");
+
+		Noesis::Gui::UIElementCollection* collection = midgrid->GetChildren();
+		Noesis::Ptr<Noesis::BitmapImage> image = *new Noesis::BitmapImage("hudie.png");
+		Ptr<Noesis::Gui::Button> singleView = *new Noesis::Gui::Button();
+		singleView->SetHorizontalAlignment(HorizontalAlignment_Left);
+		singleView->SetVerticalAlignment(VerticalAlignment_Top);
+		singleView->SetWidth(80);
+		singleView->SetHeight(80);
+		Noesis::Drawing::Thickness tmpmargin = this->getMidMargin(p);
+		singleView->SetMargin(tmpmargin);
+		Noesis::Ptr<Noesis::ImageBrush> brush = *new Noesis::ImageBrush(image.GetPtr());
+		singleView->SetBackground(brush.GetPtr());
+
+		collection->Add(singleView.GetPtr());
+		button2_ = singleView.GetPtr();
 	};
 	void myMouseButtonMove(BaseComponent* sender, const Noesis::Gui::MouseEventArgs& e) {
-		Button *btn = FindName<Button>("Button1");
-		Noesis::Point p = btn->PointFromScreen(e.position);
-		btn->SetMaxHeight(50);
-		btn->SetMaxWidth(50);
+		Noesis::Gui::Grid* mianScrren = FindName<Noesis::Gui::Grid>("mainSrceen");
+		Noesis::Point p = mianScrren->PointFromScreen(e.position);
+		Noesis::Drawing::Thickness tem = getMovesMargin(p);
+		button1_->SetMargin(tem);
 	};
+
+	Noesis::Drawing::Thickness getMovesMargin(Noesis::Point curPoint)
+{
+	Noesis::Grid* mainGrid = FindName<Noesis::Grid>("mainSrceen");
+	NsSize width = mainGrid->GetWidth();
+	NsSize height = mainGrid->GetHeight();
+	Noesis::Drawing::Thickness tmpmargin;
+	tmpmargin.left = curPoint.x-40;
+	tmpmargin.top = curPoint.y-40;
+	tmpmargin.bottom = 0;
+	tmpmargin.right = 0;
+	return tmpmargin;
+	};
+
+	Noesis::Drawing::Thickness getMidMargin(Noesis::Point curPoint)
+	{
+		Noesis::Grid* mainGrid = FindName<Noesis::Grid>("midgrid");
+		NsSize width = mainGrid->GetWidth();
+		NsSize height = mainGrid->GetHeight();
+		Noesis::Drawing::Thickness tmpmargin;
+		tmpmargin.left = curPoint.x;
+		tmpmargin.top = curPoint.y;
+		tmpmargin.bottom = 0;
+		tmpmargin.right = 0;
+		return tmpmargin;
+	};
+
+	void initCollectionView() {
+
+		Noesis::Gui::UIElementCollection* collection = diffusePanel_->GetChildren();
+		collection->Clear();
+		Noesis::ResourceDictionary* resource = GetResources();
+		Noesis::Gui::Style* cellStyle = resource->FindName<Noesis::Gui::Style>("ImageCellStyle");
+		for (int i = 0; i < 20; ++i) {
+			Ptr<Noesis::Gui::Button> cell = *new Noesis::Gui::Button();
+			cell->SetStyle(cellStyle);
+			cell->MouseDown() += MakeDelegate(this, &MyNsTest::myMouseButtonDown);
+			collection->Add(cell.GetPtr());
+		}
+	}
+	
 
 	NS_IMPLEMENT_INLINE_REFLECTION(MyNsTest, Noesis::Grid)
 	{
@@ -179,50 +223,6 @@ private:
 	{
 		NsMeta<Noesis::TypeId>("DataModel3");
 		NsProp("Players", &DataModel3::_players);
-	}
-};
-
-class MyTouch : public Noesis::Grid
-{
-public:
-	MyTouch() {};
-	~MyTouch() {};
-
-	void OnManipulationStarting(const Noesis::ManipulationStartingEventArgs& e)
-	{
-		e.mode = Noesis::ManipulationModes_All;
-		e.manipulationContainer = (Noesis::Visual*) FindName("root");
-		e.handled = true;
-	}
-
-	void OnManipulationInertiaStarting(const Noesis::ManipulationInertiaStartingEventArgs& e)
-	{
-		e.translationBehavior.desiredDeceleration = 100.0f / (1000.0f * 1000.0f);
-		e.rotationBehavior.desiredDeceleration = 360.0f / (1000.0f * 1000.0f);
-		e.expansionBehavior.desiredDeceleration = 300.0f / (1000.0f * 1000.0f);
-		e.handled = true;
-	}
-
-	void OnManipulationDelta(const Noesis::ManipulationDeltaEventArgs& e)
-	{
-		Noesis::UIElement* rectangle = (Noesis::UIElement*)e.source;
-		Noesis::MatrixTransform* tr = (Noesis::MatrixTransform*)rectangle->GetRenderTransform();
-		Noesis::Transform2f mtx = tr->GetMatrix();
-
-		mtx.RotateAt(e.deltaManipulation.rotation * Noesis::DegToRad_f, e.manipulationOrigin.x,
-			e.manipulationOrigin.y);
-		mtx.ScaleAt(e.deltaManipulation.scale, e.deltaManipulation.scale,
-			e.manipulationOrigin.x, e.manipulationOrigin.y);
-		mtx.Translate(e.deltaManipulation.translation.x, e.deltaManipulation.translation.y);
-
-		tr->SetMatrix(mtx);
-		e.handled = true;
-	}
-
-private:
-	NS_IMPLEMENT_INLINE_REFLECTION(MyTouch, Noesis::Grid)
-	{
-		NsMeta<Noesis::TypeId>("MyTouch");
 	}
 };
 
