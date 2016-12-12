@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "NsManager.h"
-#include"MySeecond.h"
 #include"MyGod.h"
 
 NsManager* NsManager::singleton = 0;
