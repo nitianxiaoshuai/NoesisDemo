@@ -7,11 +7,11 @@ class MyNsTest : public Noesis::Grid
 public:
 	MyNsTest();
 	~MyNsTest();
-	//Noesis::StackPanel* diffusePanel_;
-	//void MyNsTest::initCollectionView();
-	
+	Noesis::StackPanel* diffusePanel_;
+	void MyNsTest::initCollectionView();
 	void MyNsTest::MouseUpEvent(Noesis::BaseComponent* sender, const Noesis::Gui::MouseButtonEventArgs& e);
 	void MyNsTest::myMouseButtonMove(Noesis::BaseComponent* sender, const  Noesis::Gui::MouseEventArgs& e);
+	void MyNsTest::MouseDownEvent(Noesis::Core::BaseComponent* sender, const Noesis::MouseButtonEventArgs& e);
 	void MyNsTest::OnInitialized(Noesis::BaseComponent* sender, const Noesis::EventArgs& e);
 	Noesis::Drawing::Thickness MyNsTest::getMovesMargin(Noesis::Point curPoint);
     Noesis::Gui::Button *button1_;
